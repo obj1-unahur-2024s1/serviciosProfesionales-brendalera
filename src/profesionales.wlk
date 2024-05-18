@@ -10,11 +10,11 @@ class ProfesionalAsociado {
 
 // a esta clase le faltan métodos
 class ProfesionalVinculado {
-	var universidad = "uba"
+	var universidad 
 	method universidad() { return universidad }
 	method universidad(univ) { universidad = univ }
-	method provinciasDondePuedeTrabajar() { return universidad.provinciaDondeEsta() }
-	method honorariosPorHora() { return universidad.honorariosPorHoraDeTrabajo() }
+	method provinciasDondePuedeTrabajar(univ) { return univ.provinciaDondeEsta() }
+	method honorariosPorHora(univ) { return univ.honorariosPorHoraDeTrabajo() }
 }
 
 
@@ -38,6 +38,20 @@ class Universidad {
 	method provinciaDondeEsta(lugar) { provincia = lugar }
 	method honorariosPorHoraDeTrabajo() { return costo }
 	method honorariosPorHoraDeTrabajo(cantidad) { costo = cantidad }
+}
+
+class Empresa {
+	var costo = 0
+	const contratados = []
+	method honorario(cant){ costo = cant }
+	method honorario(){ return costo }
+	method contratarProfesional(profesional){ contratados.add(profesional) }
+	method cuantosEstudiaronEn(universidad){ 
+		contratados.count({profesional => profesional.universidad() == universidad})
+	} 
+	method profesionalesCaros(){
+		contratados.filter({profesional => profesional.honorariosPorHora() > costo})	
+	}
 }
 
 
