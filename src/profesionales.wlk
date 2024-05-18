@@ -13,7 +13,7 @@ class ProfesionalVinculado {
 	var universidad 
 	method universidad() { return universidad }
 	method universidad(univ) { universidad = univ }
-	method provinciasDondePuedeTrabajar(univ) { return univ.provinciaDondeEsta() }
+	method provinciasDondePuedeTrabajar(univ) { return univ.provinciaDondeEsta().asList() }
 	method honorariosPorHora(univ) { return univ.honorariosPorHoraDeTrabajo() }
 }
 
@@ -21,12 +21,12 @@ class ProfesionalVinculado {
 // a esta clase le faltan atributos y métodos
 class ProfesionalLibre {
 	var universidad = "uade"
-	var provincia = "Bs As"
+	const provincia = #{}
 	var costo = 500
 	method universidad() { return universidad }
 	method universidad(univ) { universidad = univ }
 	method provinciasDondePuedeTrabajar() { return provincia }
-	method provinciasDondePuedeTrabajar(prov) { provincia = prov }
+	method provinciasDondePuedeTrabajar(prov) { provincia.add(prov) }
 	method honorariosPorHora(cantidad) { costo = cantidad }
 	method honorariosPorHora() { return costo }
 }
@@ -47,10 +47,19 @@ class Empresa {
 	method honorario(){ return costo }
 	method contratarProfesional(profesional){ contratados.add(profesional) }
 	method cuantosEstudiaronEn(universidad){ 
-		contratados.count({profesional => profesional.universidad() == universidad})
+		return contratados.count({profesional => profesional.universidad() == universidad})
 	} 
 	method profesionalesCaros(){
-		contratados.filter({profesional => profesional.honorariosPorHora() > costo})	
+		return contratados.filter({profesional => profesional.honorariosPorHora() > costo})	
+	}
+	method universidadesFormadoras(){
+		return contratados.map({profesional => profesional.universidad()}).asSet()
+	}
+	method profesionalMasBarato(){
+		return contratados.min({profesional => profesional.honorariosPorHora()})
+	}
+	method genteAcotada(){
+		return contratados.all({profesional => not profesional.provinciasDondePuedeTrabajar().size() > 3})
 	}
 }
 
