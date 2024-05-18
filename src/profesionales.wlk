@@ -32,10 +32,10 @@ class ProfesionalLibre {
 }
 
 class Universidad {
-	var provincia = "Bs As"
+	const provincia = #{}
 	var costo = 400
 	method provinciaDondeEsta() { return provincia }
-	method provinciaDondeEsta(lugar) { provincia = lugar }
+	method provinciaDondeEsta(lugar) { provincia.add(lugar) }
 	method honorariosPorHoraDeTrabajo() { return costo }
 	method honorariosPorHoraDeTrabajo(cantidad) { costo = cantidad }
 }
