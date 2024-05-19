@@ -1,6 +1,6 @@
 // esta clase está completa, no necesita nada más
 class ProfesionalAsociado {
-	var universidad = "unaHur"
+	var universidad 
 	method universidad() { return universidad }
 	method universidad(univ) { universidad = univ }
 	method provinciasDondePuedeTrabajar() { return #{"Entre Ríos", "Corrientes", "Santa Fe"} }
@@ -13,14 +13,14 @@ class ProfesionalVinculado {
 	var universidad 
 	method universidad() { return universidad }
 	method universidad(univ) { universidad = univ }
-	method provinciasDondePuedeTrabajar(univ) { return univ.provinciaDondeEsta().asList() }
-	method honorariosPorHora(univ) { return univ.honorariosPorHoraDeTrabajo() }
+	method provinciasDondePuedeTrabajar() { return universidad.provinciaDondeEsta().asList() }
+	method honorariosPorHora() { return universidad.honorariosPorHoraDeTrabajo() }
 }
 
 
 // a esta clase le faltan atributos y métodos
 class ProfesionalLibre {
-	var universidad = "uade"
+	var universidad 
 	const provincia = #{}
 	var costo = 500
 	method universidad() { return universidad }
@@ -45,7 +45,8 @@ class Empresa {
 	const contratados = []
 	method honorario(cant){ costo = cant }
 	method honorario(){ return costo }
-	method contratarProfesional(profesional){ contratados.add(profesional) }
+	method contratar(profesional){ contratados.add(profesional) }
+	method contratados(){ return contratados}
 	method cuantosEstudiaronEn(universidad){ 
 		return contratados.count({profesional => profesional.universidad() == universidad})
 	} 
@@ -53,13 +54,13 @@ class Empresa {
 		return contratados.filter({profesional => profesional.honorariosPorHora() > costo})	
 	}
 	method universidadesFormadoras(){
-		return contratados.map({profesional => profesional.universidad()}).asSet()
+		return contratados.map({profesional => profesional.universidad()}).asList()
 	}
 	method profesionalMasBarato(){
 		return contratados.min({profesional => profesional.honorariosPorHora()})
 	}
 	method genteAcotada(){
-		return contratados.all({profesional => not profesional.provinciasDondePuedeTrabajar().size() > 3})
+	    return contratados.count({profesional => profesional.provinciasDondePuedeTrabajar().size() > 3}) == 0
 	}
 }
 
