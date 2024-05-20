@@ -1,0 +1,217 @@
+import profesionales.*
+test "verificar contratados en la empresa" {
+	const sanMartin = new Universidad()
+	sanMartin.provinciaDondeEsta("Bs As")
+	sanMartin.honorariosPorHoraDeTrabajo(3500)
+	
+	const rosario = new Universidad()
+	rosario.provinciaDondeEsta("Santa Fe")
+	rosario.honorariosPorHoraDeTrabajo(2800)
+	
+	const corrientes = new Universidad()
+	corrientes.provinciaDondeEsta("Corrientes")
+	corrientes.honorariosPorHoraDeTrabajo(4200)
+	
+	const hurlingham = new Universidad()
+	hurlingham.provinciaDondeEsta("Hurlingham")
+	hurlingham.honorariosPorHoraDeTrabajo(8800)
+	
+	const juana = new ProfesionalVinculado(universidad = rosario)
+	juana.universidad(rosario)
+	
+	const melina = new ProfesionalAsociado(universidad = corrientes)
+	melina.universidad(corrientes)
+	
+	const rocio = new ProfesionalLibre(universidad = hurlingham)
+	rocio.universidad(hurlingham)
+	rocio.honorariosPorHora(5000)
+	rocio.provinciasDondePuedeTrabajar(#{"Santa Fe", "Cordoba", "Bs As"})
+	
+	const luciana = new ProfesionalLibre(universidad = rosario)
+	luciana.universidad(rosario)
+	luciana.honorariosPorHora(3200)
+	luciana.provinciasDondePuedeTrabajar(#{"Santa Fe", "Entre Rios"})
+	
+	const empresa = new Empresa()
+	empresa.honorario(3500)
+	empresa.contratar(juana)
+	empresa.contratar(melina)
+	empresa.contratar(rocio)
+	empresa.contratar(luciana)
+	
+	assert.equals([juana, melina , rocio, luciana], empresa.contratados())
+}
+
+test "universidades formadoras deben ser 2 veces rosario, corrientes y hurlingham"{
+	const sanMartin = new Universidad()
+	sanMartin.provinciaDondeEsta("Bs As")
+	sanMartin.honorariosPorHoraDeTrabajo(3500)
+	
+	const rosario = new Universidad()
+	rosario.provinciaDondeEsta("Santa Fe")
+	rosario.honorariosPorHoraDeTrabajo(2800)
+	
+	const corrientes = new Universidad()
+	corrientes.provinciaDondeEsta("Corrientes")
+	corrientes.honorariosPorHoraDeTrabajo(4200)
+	
+	const hurlingham = new Universidad()
+	hurlingham.provinciaDondeEsta("Hurlingham")
+	hurlingham.honorariosPorHoraDeTrabajo(8800)
+	
+	const juana = new ProfesionalVinculado(universidad = rosario)
+	juana.universidad(rosario)
+	
+	const melina = new ProfesionalAsociado(universidad = corrientes)
+	melina.universidad(corrientes)
+	
+	const rocio = new ProfesionalLibre(universidad = hurlingham)
+	rocio.universidad(hurlingham)
+	rocio.honorariosPorHora(5000)
+	rocio.provinciasDondePuedeTrabajar(#{"Santa Fe", "Cordoba", "Bs As"})
+	
+	const luciana = new ProfesionalLibre(universidad = rosario)
+	luciana.universidad(rosario)
+	luciana.honorariosPorHora(3200)
+	luciana.provinciasDondePuedeTrabajar(#{"Santa Fe", "Entre Rios"})
+	
+	const empresa = new Empresa()
+	empresa.honorario(3500)
+	empresa.contratar(juana)
+	empresa.contratar(melina)
+	empresa.contratar(rocio)
+	empresa.contratar(luciana)
+	
+	assert.equals([rosario, corrientes, hurlingham, rosario], empresa.universidadesFormadoras())
+}
+
+test "el profesional mas caro es rocio"{
+	const sanMartin = new Universidad()
+	sanMartin.provinciaDondeEsta("Bs As")
+	sanMartin.honorariosPorHoraDeTrabajo(3500)
+	
+	const rosario = new Universidad()
+	rosario.provinciaDondeEsta("Santa Fe")
+	rosario.honorariosPorHoraDeTrabajo(2800)
+	
+	const corrientes = new Universidad()
+	corrientes.provinciaDondeEsta("Corrientes")
+	corrientes.honorariosPorHoraDeTrabajo(4200)
+	
+	const hurlingham = new Universidad()
+	hurlingham.provinciaDondeEsta("Hurlingham")
+	hurlingham.honorariosPorHoraDeTrabajo(8800)
+	
+	const juana = new ProfesionalVinculado(universidad = rosario)
+	juana.universidad(rosario)
+	
+	const melina = new ProfesionalAsociado(universidad = corrientes)
+	melina.universidad(corrientes)
+	
+	const rocio = new ProfesionalLibre(universidad = hurlingham)
+	rocio.universidad(hurlingham)
+	rocio.honorariosPorHora(5000)
+	rocio.provinciasDondePuedeTrabajar(#{"Santa Fe", "Cordoba", "Bs As"})
+	
+	const luciana = new ProfesionalLibre(universidad = rosario)
+	luciana.universidad(rosario)
+	luciana.honorariosPorHora(3200)
+	luciana.provinciasDondePuedeTrabajar(#{"Santa Fe", "Entre Rios"})
+	
+	const empresa = new Empresa()
+	empresa.honorario(3500)
+	empresa.contratar(juana)
+	empresa.contratar(melina)
+	empresa.contratar(rocio)
+	empresa.contratar(luciana)
+	
+	assert.equals([rocio], empresa.profesionalesCaros())
+}
+
+test "el personal mas barato es luciana"{
+	const sanMartin = new Universidad()
+	sanMartin.provinciaDondeEsta("Bs As")
+	sanMartin.honorariosPorHoraDeTrabajo(3500)
+	
+	const rosario = new Universidad()
+	rosario.provinciaDondeEsta("Santa Fe")
+	rosario.honorariosPorHoraDeTrabajo(2800)
+	
+	const corrientes = new Universidad()
+	corrientes.provinciaDondeEsta("Corrientes")
+	corrientes.honorariosPorHoraDeTrabajo(4200)
+	
+	const hurlingham = new Universidad()
+	hurlingham.provinciaDondeEsta("Hurlingham")
+	hurlingham.honorariosPorHoraDeTrabajo(8800)
+	
+	const juana = new ProfesionalVinculado(universidad = rosario)
+	juana.universidad(rosario)
+	
+	const melina = new ProfesionalAsociado(universidad = corrientes)
+	melina.universidad(corrientes)
+	
+	const rocio = new ProfesionalLibre(universidad = hurlingham)
+	rocio.universidad(hurlingham)
+	rocio.honorariosPorHora(5000)
+	rocio.provinciasDondePuedeTrabajar(#{"Santa Fe", "Cordoba", "Bs As"})
+	
+	const luciana = new ProfesionalLibre(universidad = rosario)
+	luciana.universidad(rosario)
+	luciana.honorariosPorHora(3200)
+	luciana.provinciasDondePuedeTrabajar(#{"Santa Fe", "Entre Rios"})
+	
+	const empresa = new Empresa()
+	empresa.honorario(3500)
+	empresa.contratar(juana)
+	empresa.contratar(melina)
+	empresa.contratar(rocio)
+	empresa.contratar(luciana)
+	
+	assert.equals(juana, empresa.profesionalMasBarato())
+}
+
+test "la empresa es de gente acotada"{
+	const sanMartin = new Universidad()
+	sanMartin.provinciaDondeEsta("Bs As")
+	sanMartin.honorariosPorHoraDeTrabajo(3500)
+	
+	const rosario = new Universidad()
+	rosario.provinciaDondeEsta("Santa Fe")
+	rosario.honorariosPorHoraDeTrabajo(2800)
+	
+	const corrientes = new Universidad()
+	corrientes.provinciaDondeEsta("Corrientes")
+	corrientes.honorariosPorHoraDeTrabajo(4200)
+	
+	const hurlingham = new Universidad()
+	hurlingham.provinciaDondeEsta("Hurlingham")
+	hurlingham.honorariosPorHoraDeTrabajo(8800)
+	
+	const juana = new ProfesionalVinculado(universidad = rosario)
+	juana.universidad(rosario)
+	
+	const melina = new ProfesionalAsociado(universidad = corrientes)
+	melina.universidad(corrientes)
+	
+	const rocio = new ProfesionalLibre(universidad = hurlingham)
+	rocio.universidad(hurlingham)
+	rocio.honorariosPorHora(5000)
+	rocio.provinciasDondePuedeTrabajar(#{"Santa Fe", "Cordoba", "Bs As"})
+	
+	const luciana = new ProfesionalLibre(universidad = rosario)
+	luciana.universidad(rosario)
+	luciana.honorariosPorHora(3200)
+	luciana.provinciasDondePuedeTrabajar(#{"Santa Fe", "Entre Rios"})
+	
+	const empresa = new Empresa()
+	empresa.honorario(3500)
+	empresa.contratar(juana)
+	empresa.contratar(melina)
+	empresa.contratar(rocio)
+	empresa.contratar(luciana)
+	
+	assert.that(empresa.genteAcotada())
+}
+
+

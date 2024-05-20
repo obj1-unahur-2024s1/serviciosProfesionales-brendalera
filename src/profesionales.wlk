@@ -64,4 +64,10 @@ class Empresa {
 	}
 }
 
+class Persona {
+	var lugar
+	method viveEnProvincia(prov){ lugar = prov}
+	method viveEnProvincia(){ return lugar }
+	method puedeSerAtendidoPor(profesional){ return profesional.provinciaDondePuedeTrabajar().contains(lugar)}
+}
 
