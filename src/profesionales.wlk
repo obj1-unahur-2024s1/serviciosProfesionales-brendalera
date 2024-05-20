@@ -13,7 +13,7 @@ class ProfesionalVinculado {
 	var universidad 
 	method universidad() { return universidad }
 	method universidad(univ) { universidad = univ }
-	method provinciasDondePuedeTrabajar() { return universidad.provinciaDondeEsta().asList() }
+	method provinciasDondePuedeTrabajar() { return universidad.provinciaDondeEsta().asSet() }
 	method honorariosPorHora() { return universidad.honorariosPorHoraDeTrabajo() }
 }
 
@@ -60,7 +60,7 @@ class Empresa {
 		return contratados.min({profesional => profesional.honorariosPorHora()})
 	}
 	method genteAcotada(){
-	    return contratados.count({profesional => profesional.provinciasDondePuedeTrabajar().size() > 3}) == 0
+	    return not contratados.any({profesional => profesional.provinciasDondePuedeTrabajar().size() > 3}) 
 	}
 }
 
