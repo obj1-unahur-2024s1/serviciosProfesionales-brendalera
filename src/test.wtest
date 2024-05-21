@@ -125,7 +125,7 @@ test "el profesional mas caro es rocio"{
 	empresa.contratar(rocio)
 	empresa.contratar(luciana)
 	
-	assert.equals([rocio], empresa.profesionalesCaros())
+	assert.equals(#{melina, rocio}, empresa.profesionalesCaros())
 }
 
 test "el personal mas barato es luciana"{
@@ -214,4 +214,11 @@ test "la empresa es de gente acotada"{
 	assert.that(empresa.genteAcotada())
 }
 
-
+// property es un atributo que permite obtener el valor y cambiarlo
+// method initialize() {
+//		e1.agregarProfesional(juana)
+//		e1.agregarProfesional(melina)
+//		e1.agregarProfesional(rocio)
+//		e1.agregarProfesional(lucia)
+//	}
+// dentro de "describe" se coloca el method para no repetir constantemente los valores 

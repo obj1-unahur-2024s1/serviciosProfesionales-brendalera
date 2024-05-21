@@ -60,14 +60,17 @@ class Empresa {
 		return contratados.min({profesional => profesional.honorariosPorHora()})
 	}
 	method genteAcotada(){
-	    return not contratados.any({profesional => profesional.provinciasDondePuedeTrabajar().size() > 3}) 
+	    return contratados.all({profesional => profesional.provinciasDondePuedeTrabajar().size() <= 3}) 
+	}
+	method puedeSatisfacer(persona){
+		return contratados.any({profesional => persona.puedeSerAtendidoPor(profesional)})
 	}
 }
 
 class Persona {
 	var lugar
-	method viveEnProvincia(prov){ lugar = prov}
+	method viveEnProvincia(prov){ lugar = prov }
 	method viveEnProvincia(){ return lugar }
-	method puedeSerAtendidoPor(profesional){ return profesional.provinciaDondePuedeTrabajar().contains(lugar)}
+	method puedeSerAtendidoPor(profesional){ return profesional.provinciaDondePuedeTrabajar().contains(lugar) }
 }
 
